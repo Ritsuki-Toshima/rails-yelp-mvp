@@ -1,0 +1,33 @@
+<div class="container">
+
+  <div class="card-trip mt-3 mb-3">
+    <%= image_tag "http://source.unsplash.com/featured/?#{@restaurant.category} food>&#{rand(1000)}" %>
+    <div class="card-trip-infos">
+      <div>
+        <h2><%= @restaurant.name %></h2>
+        <p><%= @restaurant.category %></p>
+        <p><%= @restaurant.address %></p>
+        <p><%= @restaurant.phone_number %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-2" style="display: flex; justify-content: space-between;">
+    <div><h3>Reviews</h3></div>
+    <div><%= link_to "Add a review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %></div>
+  </div>
+  <div class="reviews card">
+    <% if @restaurant.reviews.any? %>
+      <ul class="list-group list-group-flush">
+        <% @restaurant.reviews.each do |review| %>
+          <li class="list-group-item">
+            <%= "☆" * review.rating + "★" * (5 - review.rating) %>
+            <%= review.content  %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>There is no review</p>
+    <% end %>
+  </div>
+</div>
